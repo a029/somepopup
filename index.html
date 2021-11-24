@@ -4,9 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+    #toast{
+        position: fixed;
+        top: 20%;
+        right: 10%;
+        padding: 1rem 1rem;
+        transform: translate(-50%, 10px);
+        border-radius: 2rem;
+        overflow: hidden;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity .5s, visubility .5s, transform .5s;
+        background: rgba(0, 0, 0, .35);
+        color: #fff;
+        z-index: 10000;
+    }
+    #toast.reveal{
+        opacity: 1;
+        visibility: visible;
+        transform: translate(-50%, 0);
+    }
+    </style>
     <script type="text/javascript">
         function buttonAlert() {
             alert('shit');
+        }
+
+        //타임아웃시간 설정용 변수
+        let removeToast;
+        function toast(string) {
+            const toast = document.getElementById("toast");
+            
+            //toast에 reveal이 있으면 타임아웃시간 초기화
+            if(toast.classList.contains("reveal")){
+                clearTimeout(removeToast);
+            }
+
+            //toast의 reveal 을 없앨 타임아웃 시간 설정 1000ms
+            removeToast = setTimeout(function(){
+                document.getElementById("toast").classList.remove("reveal");
+            }, 1000);
+
+            //toast의 class에 reveal을 추가하고, 텍스트를 넣는다
+            toast.classList.add("reveal");
+            toast.innerText = string;
         }
     </script>
 </head>
@@ -14,6 +56,8 @@
     <div>
         <input type="button" value="button" onclick="buttonAlert();">
         <input type="button" value="button" onclick="buttonAlert();">
+        <input type="button" value="경치" onclick='toast("경험치1")'>
     </div>
+    <div id="toast"></div>
 </body>
 </html>
