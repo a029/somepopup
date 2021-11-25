@@ -27,10 +27,11 @@
     }
     </style>
     <script type="text/javascript">
-        function buttonAlert() {
-            alert('nowayout');
-        }
-
+        let chara = {
+            name : "철수",
+            age : 20,
+            exp : 0
+        };
         //타임아웃시간 설정용 변수
         let removeToast;
         function toast(string) {
@@ -48,17 +49,35 @@
 
             //toast의 class에 reveal을 추가하고, 텍스트를 넣는다
             toast.classList.add("reveal");
+            chara.exp++;
+            document.getElementById("chaexp").innerText = chara.exp;
             toast.innerText = string;
         }
     </script>
 </head>
 <body>
     <div>
-        <input type="button" value="nomarcy" onclick="buttonAlert();">
-        <input type="button" value="nomarcy" onclick="buttonAlert();">
         <input type="button" value="경치" onclick='toast("경험치1")'>
     </div>
-    <div>잔디밭</div>
+    <div>
+        <table>
+            <tr>
+                <td>이름</td>
+                <td>나이</td>
+                <td>경치</td>
+            </tr>
+            <tr>
+                <td id="chaname"></td>
+                <td id="chaage"></td>
+                <td id="chaexp"></td>
+            </tr>
+        </table>
+    </div>
     <div id="toast"></div>
+    <script>
+        document.getElementById("chaname").innerText = chara.name;
+        document.getElementById("chaage").innerText = chara.age;
+        document.getElementById("chaexp").innerText = chara.exp;
+    </script>
 </body>
 </html>
